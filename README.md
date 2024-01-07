@@ -27,7 +27,7 @@ In the wagtailTest folder path (C:\\....\BookApp> )
 python -m venv bookapp\env
 ```
 ```
-Blogger\env\Scripts\activate
+bookapp\env\Scripts\activate
 ```
 ```
 pip install wagtail
