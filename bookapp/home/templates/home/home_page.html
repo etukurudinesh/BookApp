@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+
+{% block content %}
+
+
+<div class="jumbotron">
+
+    {# View child pages if available #}
+    {% if page.get_children.specific %}
+        {% for child in page.get_children.specific %}
+            <h1 class="display-4"> {{child.authorName}}</h1>
+            <a class="btn btn-dark" href="{{ child.url }}" role="button">Link to {{child.authorName}}</a>
+        {% endfor %} 
+    {# else print the message to prompt the admins to add the pages#}
+    {% else %}
+        <h2> There are no Pages attached to home page, </h2>
+        <h2>Add authors to homepage to to view the page.</h2>
+        <h2>Books can be added to the authors in the admin page</h2>
+    {% endif %}
+      
+</div>
+
+
+    
+
+{% endblock content %}

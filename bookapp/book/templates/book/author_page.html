@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+{% load wagtailcore_tags wagtailimages_tags  %} 
+
+{% block body_class %}
+    template-authorpage
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+
+    <h1 class="display-4">
+        {# render author name#}
+        {{self.authorName}}
+    </h1>
+    <p class="lead">
+        {# render Author Description#}
+        {{self.authorDescription|richtext}}
+    </p>
+    <hr class="my-4" />
+    {# Children are present #}
+    {% if page.get_children.specific %}
+
+        <h3> Books written by {{self.authorName}}</h3>
+        {# loop through each child #}
+        {% for child in page.get_children.specific %}
+            <div class="lead">
+                {# Render bookname and description if present as a child#}
+                <h4> {{ child.bookName }}</h2> 
+                <p>
+                    {{ child.bookPublishedOn }}<br>
+                    {{ child.bookDescription|richtext }}
+                </p>
+            </div>
+            {# Button to child/book page #}
+            <a class="btn btn-dark btn-sm col-2" href="{{ child.url }}" role="button">Link to {{child.bookName}}</a>
+        {% endfor %} 
+
+    {% endif %} 
+</div>
+    {# Go to parent if parent exists #}
+    {% if page.get_parent %}
+        <a class="btn btn-primary btn-sm col-5" href="{{ page.get_parent.url }}" role="button"> Home Page</a>
+    {% endif %}  
+
+ 
+{% endblock %}
